@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&amp;family=Zhi+Mang+Xing&amp;family=Newsreader:ital,wght@0,400;0,700;1,400&amp;family=Space+Grotesk:wght@300;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "background": "#F5F5F0",
+              "outline-variant": "#d2c4a7",
+              "tertiary-container": "#f3e2c7",
+              "on-tertiary": "#2C2621",
+              "on-secondary": "#ffffff",
+              "on-primary-fixed-variant": "#4A3B32",
+              "on-primary-container": "#ffffff",
+              "error": "#ba1a1a",
+              "on-error": "#ffffff",
+              "inverse-on-surface": "#F2EAE1",
+              "surface-variant": "#e8ddd0",
+              "tertiary": "#c19e67",
+              "surface-dim": "#d2c4a7",
+              "on-secondary-container": "#2C2621",
+              "surface-bright": "#FCFAF7",
+              "surface-tint": "#4A3B32",
+              "on-background": "#2C2621",
+              "inverse-primary": "#f3e2c7",
+              "secondary": "#A44C40",
+              "surface-container-low": "#4A3B32",
+              "on-primary-fixed": "#2C2621",
+              "inverse-surface": "#3a2e26",
+              "on-tertiary-container": "#3a2e26",
+              "error-container": "#ffdad6",
+              "primary": "#4A3B32",
+              "on-tertiary-fixed-variant": "#b68d4c",
+              "on-error-container": "#93000a",
+              "primary-container": "#A44C40",
+              "primary-fixed": "#e8ddd0",
+              "secondary-container": "#c19e67",
+              "on-secondary-fixed-variant": "#A44C40",
+              "surface": "#F5F5F0",
+              "secondary-fixed": "#f3e2c7",
+              "tertiary-fixed-dim": "#d2c4a7",
+              "on-primary": "#FCFAF7",
+              "surface-container": "#F5F5F0",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#2C2621",
+              "tertiary-fixed": "#4A3B32",
+              "on-tertiary-fixed": "#2C2621",
+              "on-secondary-fixed": "#2C2621",
+              "surface-container-highest": "#F5F5F0",
+              "on-surface-variant": "#4A3B32",
+              "secondary-fixed-dim": "#c19e67",
+              "surface-container-high": "#e8ddd0",
+              "primary-fixed-dim": "#d2c4a7",
+              "outline": "#9ca3af"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif SC", "serif"],
+              "body": ["Newsreader", "serif"],
+              "label": ["Space Grotesk", "sans-serif"],
+              "hand": ["Zhi Mang Xing", "cursive"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .grainy-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .vine-line {
+            background: linear-gradient(to bottom, transparent, #c19e67 10%, #c19e67 90%, transparent);
+            width: 1.5px;
+        }
+        .polaroid-shadow {
+            box-shadow: 3px 4px 12px rgba(44, 38, 33, 0.08);
+        }
+        .washi-tape {
+            background: rgba(193, 158, 103, 0.4);
+            backdrop-filter: blur(1px);
+        }
+    </style>
+</head>
+<body class="bg-[#F5F5F0] min-h-screen font-body overflow-x-hidden">
+<div class="grainy-overlay"></div>
+<main class="relative pt-24 pb-40 px-4 max-w-5xl mx-auto">
+<!-- Header Section -->
+<header class="text-center mb-24 relative z-10">
+<h1 class="font-hand text-6xl md:text-8xl text-primary mb-4 opacity-80">记忆之蔓</h1>
+<p class="font-label text-sm uppercase tracking-[0.3em] text-primary/60">Memory Vine Timeline</p>
+</header>
+<!-- The Vine Container -->
+<div class="relative">
+<!-- Central Vine -->
+<div class="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 vine-line z-0">
+<!-- Decorative Leaves -->
+<div class="absolute top-[10%] -left-3 text-tertiary opacity-60"><span class="material-symbols-outlined text-sm" data-icon="eco">eco</span></div>
+<div class="absolute top-[35%] -right-3 text-tertiary opacity-60 rotate-180"><span class="material-symbols-outlined text-sm" data-icon="eco">eco</span></div>
+<div class="absolute top-[60%] -left-3 text-tertiary opacity-60 -rotate-90"><span class="material-symbols-outlined text-sm" data-icon="eco">eco</span></div>
+<div class="absolute top-[85%] -right-3 text-tertiary opacity-60 rotate-45"><span class="material-symbols-outlined text-sm" data-icon="eco">eco</span></div>
+</div>
+<!-- Timeline Entries -->
+<div class="space-y-48 relative z-10">
+<!-- Entry 1: Left -->
+<div class="flex flex-col md:flex-row items-center justify-center md:justify-start">
+<div class="md:w-1/2 flex justify-center md:justify-end md:pr-16 lg:pr-24">
+<div class="relative group rotate-[-2deg] transform transition-transform hover:rotate-0 duration-500">
+<!-- Washi Tape -->
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-6 washi-tape z-20 border-x border-dashed border-white/20"></div>
+<div class="bg-surface-bright p-4 pb-12 polaroid-shadow border border-outline-variant/10">
+<img alt="Vintage tea cup on a rustic table" class="w-64 h-64 object-cover mb-4" data-alt="Vintage tea cup sitting on a rustic wooden table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYJs-bJscWj5XAyRh2FHB4llgy7YRLjSOJEld3rkJF9fBt5YhtLIuy014CwjA-n7Y9AQnh5gAX9nzo37DhNZa0WQTej3ALGhM02fmekXu2fB-pESa8Dpns95DWHQYGsVhsB6gs4NF0m5DMrag9aQRekdEt4x2mcSykVaK-IhL50qbxldZzowr9QNO3doi2ZBccZ-oAN7PeBzuq2OKNqdzuh372clf6j0X7b_OgUK72tVsM_BKRu5qaVoM38BuRC-kH_3zSETJHvM9c"/>
+<p class="font-hand text-3xl text-primary/80 mt-2 text-center">午后的第一缕茶香</p>
+<div class="absolute bottom-2 right-4 font-label text-[10px] text-outline opacity-50">2023.10.12</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Entry 2: Right -->
+<div class="flex flex-col md:flex-row items-center justify-center md:justify-end">
+<div class="md:w-1/2 flex justify-center md:justify-start md:pl-16 lg:pl-24">
+<div class="relative group rotate-[3deg] transform transition-transform hover:rotate-0 duration-500">
+<!-- Washi Tape -->
+<div class="absolute -top-3 left-4 w-12 h-5 washi-tape z-20 opacity-60 rotate-12 border-x border-dashed border-white/20"></div>
+<div class="bg-surface-bright p-4 pb-12 polaroid-shadow border border-outline-variant/10">
+<img alt="Old stone path in a foggy mountain village" class="w-64 h-64 object-cover mb-4" data-alt="Winding stone path leading into a misty village" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_jCgUviEDrFFZg5qOmlUVTzzvO5J8Em1dMlwbUxZ8tHW6O-cxmKiDqCFFiOS0-3V5SeZP0MGjORiv7PQ_7UJ9_Vy_k0T0Z5VIQeLy8759xs5ygFp80_jJeb5S2VtPWGpZeravVQK0h6fM3HPPldZDvtd8MHQzGhKHgmli4xjh_zwB9mhMpL0vj6OSO4kl-AnB1qXKH1cTE-93VingL_Ugrx_0uBnq2aZXw2o_3xA6UmcgbLERBOMvaCLqtHnBdHIFx_2SFTpL0DBO"/>
+<p class="font-hand text-3xl text-primary/80 mt-2 text-center">山间的迷雾与石径</p>
+<div class="absolute bottom-2 right-4 font-label text-[10px] text-outline opacity-50">2023.11.05</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Entry 3: Left -->
+<div class="flex flex-col md:flex-row items-center justify-center md:justify-start">
+<div class="md:w-1/2 flex justify-center md:justify-end md:pr-16 lg:pr-24">
+<div class="relative group rotate-[-1deg] transform transition-transform hover:rotate-0 duration-500">
+<div class="absolute -top-2 right-4 w-14 h-5 washi-tape z-20 opacity-50 -rotate-6 border-x border-dashed border-white/20"></div>
+<div class="bg-surface-bright p-4 pb-12 polaroid-shadow border border-outline-variant/10">
+<img alt="Dried flower pressed inside an old book" class="w-64 h-64 object-cover mb-4" data-alt="Delicate dried wildflower pressed between yellowed book pages" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzTf07oe2nebawLhHCHzRbSHdLOrnX-_h2k1dKGjS-wT4ry4epTl_pZ5QwUyXlx2W5Obivg3LnhMvxNrVQYwQGFnw-JwU76uuzAvu4MhNABmYnr_JL1wAGdBNhMeTOUPn6JKUcb9Oe2_FRfp-4cc3YGUadEkrp8g6ic4qQD1b-cseCDFfW92AWqz0_BvTS_ol2o2krA-81OlmrdKN-IWYglIr9mxxyT4OuKnDJdu0QN9uDdIYXqAM2Qzi75KeHfkHmSwuIegBKNfYE"/>
+<p class="font-hand text-3xl text-primary/80 mt-2 text-center">书页里的干花信箋</p>
+<div class="absolute bottom-2 right-4 font-label text-[10px] text-outline opacity-50">2023.12.24</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Entry 4: Right -->
+<div class="flex flex-col md:flex-row items-center justify-center md:justify-end">
+<div class="md:w-1/2 flex justify-center md:justify-start md:pl-16 lg:pl-24">
+<div class="relative group rotate-[2deg] transform transition-transform hover:rotate-0 duration-500">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-6 washi-tape z-20 border-x border-dashed border-white/20"></div>
+<div class="bg-surface-bright p-4 pb-12 polaroid-shadow border border-outline-variant/10">
+<img alt="Night sky with faint constellation stars" class="w-64 h-64 object-cover mb-4" data-alt="Deep blue night sky filled with distant stars" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb426zu7qZMOMljuhIishpTwTg1NmDfu9FATtk-AENsmgsf_viRCwihPaHx9HifaGM66QsZ-rArbaxbcyiteGKfV9Y4Bs4w7KvNmxMUF8pUUUk-Ikfk8kBdOVEPqaKD07zDs7OQXsLk8M29Jkki4rpNBqaTbGU9CrM5HVjIRAloB8BRceTfPEcUBxVo-2Cfgh9ApqUI-2T9KAiwU68Po1eeIVmaZVfLM6IIwXJ7Xmtj9WWzxygegyA9xExb8BXy3oVBLCYyUr5iUy7"/>
+<p class="font-hand text-3xl text-primary/80 mt-2 text-center">繁星坠入梦境的夜晚</p>
+<div class="absolute bottom-2 right-4 font-label text-[10px] text-outline opacity-50">2024.01.18</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Visible only on mobile) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#3a2e26] dark:bg-[#2c221b] shadow-[0_-15px_30px_rgba(0,0,0,0.4)] border-t border-dashed border-[#f5ebd9]/20 rounded-t-xl md:hidden">
+<a class="flex flex-col items-center justify-center text-[#f5ebd9]/40 hover:text-[#f5ebd9] transition-all Active: scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="book_2">book_2</span>
+<span class="font-mono text-[10px] uppercase tracking-widest mt-1">Memory</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#f5ebd9] scale-110" href="#">
+<span class="material-symbols-outlined" data-icon="Park" style="font-variation-settings: 'FILL' 1;">park</span>
+<span class="font-mono text-[10px] uppercase tracking-widest mt-1">Garden</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#f5ebd9]/40 hover:text-[#f5ebd9] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-mono text-[10px] uppercase tracking-widest mt-1">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#f5ebd9]/40 hover:text-[#f5ebd9] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person_2">person_2</span>
+<span class="font-mono text-[10px] uppercase tracking-widest mt-1">Profile</span>
+</a>
+</nav>
+<!-- Floating Action Button - Moved to bottom right -->
+<div class="fixed bottom-8 right-8 z-[60]">
+<button class="bg-gradient-to-br from-tertiary to-on-tertiary-fixed-variant p-4 rounded-full shadow-lg text-on-primary hover:scale-110 transition-transform active:scale-95 group">
+<span class="material-symbols-outlined block group-hover:rotate-90 transition-transform" data-icon="add">add</span>
+</button>
+</div>
+</body></html>

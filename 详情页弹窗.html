@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>记忆详情 - 复古剪贴簿</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&amp;family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2C2621",
+                        "background-light": "#F2EAE1",
+                        "background-dark": "#221210",
+                        "surface": "#FCFAF7",
+                        "text-soft": "#3A342E",
+                        "muted": "#9CA3AF",
+                        "accent": "#A44C40"
+                    },
+                    fontFamily: {
+                        "display": ["'Playfair Display'", "serif"],
+                        "hand": ["'Caveat'", "cursive", "'Noto Sans SC'", "serif"],
+                        "type": ["'Courier Prime'", "monospace", "'Noto Sans SC'", "sans-serif"]
+                    },
+                    boxShadow: {
+                        "paper": "3px 4px 0px rgba(44, 38, 33, 0.15)",
+                        "ink": "1px 1px 0px rgba(44, 38, 33, 0.4)",
+                        "polaroid": "0 10px 25px -5px rgba(44, 38, 33, 0.3)"
+                    },
+                    backgroundImage: {
+                        'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.08%22/%3E%3C/svg%3E')",
+                        'ruled': "linear-gradient(transparent 95%, #9CA3AF 95%)",
+                        'film-grain': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%221.5%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.15%22/%3E%3C/svg%3E')"
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #F2EAE1;
+            background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.08%22/%3E%3C/svg%3E');
+        }
+        .sepia-filter {
+            filter: sepia(0.3) contrast(1.1) brightness(0.95);
+        }
+        .vintage-tape {
+            background: rgba(210, 196, 167, 0.85);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            position: absolute;
+            z-index: 20;
+        }
+        .vintage-tape::before, .vintage-tape::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: inherit;
+        }
+        .vintage-tape::before {
+            left: -2px;
+            clip-path: polygon(100% 0, 0 10%, 100% 20%, 0 30%, 100% 40%, 0 50%, 100% 60%, 0 70%, 100% 80%, 0 90%, 100% 100%);
+        }
+        .vintage-tape::after {
+            right: -2px;
+            clip-path: polygon(0 0, 100% 10%, 0 20%, 100% 30%, 0 40%, 100% 50%, 0 60%, 100% 70%, 0 80%, 100% 90%, 0 100%);
+        }
+        /* Custom adjustment for Chinese characters in handwritten style */
+        .zh-hand {
+            font-family: 'Caveat', cursive, 'Ma Shan Zheng', cursive, 'Kaiti', serif;
+        }
+    </style>
+</head>
+<body class="font-hand text-primary antialiased min-h-screen overflow-hidden">
+<!-- Lightbox Overlay -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8 overflow-y-auto">
+<!-- Backdrop -->
+<div class="absolute inset-0 backdrop-blur-[4px] cursor-pointer transition-opacity duration-300 bg-background-light"></div>
+<!-- Close Button -->
+<button aria-label="关闭" class="absolute top-6 right-6 z-50 flex items-center justify-center hover:text-accent transition-colors duration-200 text-primary">
+<span class="material-symbols-outlined text-4xl" data-icon="close">close</span>
+</button>
+<!-- Main Content Container -->
+<div class="relative z-10 w-full max-w-4xl flex flex-col md:flex-row items-center justify-center gap-8 py-12 md:py-0">
+<!-- Polaroid Container -->
+<div class="relative flex-shrink-0 transform rotate-1 hover:rotate-0 transition-transform duration-500 ease-out z-20">
+<!-- Washi Tape -->
+<div class="vintage-tape w-24 h-6 -top-3 -left-4 transform -rotate-12"></div>
+<div class="vintage-tape w-20 h-6 -bottom-3 -right-4 transform rotate-6"></div>
+<!-- Polaroid Frame -->
+<div class="bg-surface p-4 pb-20 shadow-polaroid rounded-sm border border-primary/10 relative max-w-[90vw] md:max-w-none">
+<!-- Media Area (Video Example with 8mm overlay) -->
+<div class="relative aspect-[4/3] w-[80vw] md:w-[600px] max-h-[614px] bg-black overflow-hidden group cursor-pointer border border-primary/20">
+<img alt="京都繁忙街道的复古场景" class="w-full h-full object-cover sepia-filter group-hover:scale-105 transition-transform duration-3000 ease-out" data-alt="京都繁忙街道的复古场景" data-location="日本，京都" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6cmy-QgIbmTVtkHVAHXbCjtB_RKuBm7Hbs-LRz68aFC85wGKSXpBvetZIzAe8-kSceQ8IfNbrlI0ncidm5RjZWL2EIIcHRj4u0JiLD3M9ZXSXXmLQH51Uy28RCT8wscfwQ1xAsnzl_-hA8MNu8ieM6kPmLlbQp-Rlrj4iSu1TqZS3E4LQoT-riM-EmghFTQ8pZQnf5JlZRn0k72rfZuPhb-ChHAzZClPoRs55XyTttlvlnnLeQsYsrH0tUZfxijsUwkDV_RLVh6qi"/>
+<!-- 8mm Film Overlay (visible on hover/active) -->
+<div class="absolute inset-0 bg-film-grain opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay pointer-events-none"></div>
+<div class="absolute inset-0 shadow-[inset_0_0_50px_rgba(0,0,0,0.8)] pointer-events-none"></div>
+<!-- Play Indicator -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="w-16 h-16 rounded-full border-2 border-white/50 flex items-center justify-center bg-black/20 backdrop-blur-sm group-hover:opacity-0 transition-opacity duration-300">
+<span class="material-symbols-outlined text-white/80 text-4xl ml-1" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<!-- Scratches Effect -->
+<div class="absolute inset-0 opacity-0 group-hover:opacity-30 pointer-events-none transition-opacity duration-500 flex justify-center">
+<div class="h-full w-[1px] bg-white/40 transform -translate-x-12 animate-[pulse_3s_infinite]"></div>
+<div class="h-full w-[2px] bg-black/20 transform translate-x-24 animate-[pulse_2s_infinite]"></div>
+</div>
+</div>
+<!-- Short Note / Caption on Polaroid -->
+<div class="absolute bottom-6 w-full left-0 px-6 text-center">
+<p class="font-hand text-3xl text-primary transform -rotate-2 zh-hand">
+                        迷失在雨中...
+                    </p>
+</div>
+</div>
+</div>
+<!-- Extended Letter / Note Container -->
+<div class="relative w-[85vw] md:w-[400px] -mt-12 md:mt-16 md:-ml-24 z-10 transform -rotate-2">
+<!-- The Paper Letter -->
+<div class="bg-background-light shadow-paper p-8 min-h-[300px] border border-primary/10 relative overflow-hidden">
+<!-- Paper Texture Overlay -->
+<div class="absolute inset-0 bg-noise opacity-50 pointer-events-none"></div>
+<!-- Ruled Lines Background -->
+<div class="absolute inset-0 mt-24 bg-[length:100%_32px] pointer-events-none" style="background-image: linear-gradient(transparent 31px, rgba(156, 163, 175, 0.3) 32px);"></div>
+<!-- Postmark / Metadata Header -->
+<div class="flex justify-between items-start mb-8 relative z-10 border-b-2 border-primary/20 pb-4 border-dashed">
+<div class="flex flex-col">
+<span class="font-type text-xs text-text-soft tracking-widest uppercase">地点</span>
+<span class="font-type text-primary font-bold">日本，京都</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-type text-xs text-text-soft tracking-widest uppercase">日期与时间</span>
+<span class="font-type text-primary font-bold">1998年10月24日</span>
+<span class="font-type text-xs text-text-soft">下午 14:32</span>
+</div>
+<!-- Vintage Stamp Graphic -->
+<div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-4 opacity-80 pointer-events-none">
+<div class="w-20 h-20 border-4 border-accent rounded-full flex items-center justify-center transform rotate-12">
+<div class="w-16 h-16 border border-accent rounded-full flex items-center justify-center">
+<span class="font-type text-accent text-[10px] text-center uppercase font-bold tracking-tighter transform -rotate-12">
+                                    邮戳<br/>已盖
+                                </span>
+</div>
+</div>
+<!-- Wavy cancellation lines -->
+<div class="absolute top-1/2 left-full w-12 h-4 -translate-y-1/2 flex flex-col justify-between overflow-hidden">
+<div class="w-full border-t-2 border-accent border-dashed transform -rotate-6"></div>
+<div class="w-full border-t-2 border-accent border-dashed transform -rotate-6"></div>
+<div class="w-full border-t-2 border-accent border-dashed transform -rotate-6"></div>
+</div>
+</div>
+</div>
+<!-- Extended Handwritten Content -->
+<div class="relative z-10 font-hand text-xl leading-[32px] text-primary zh-hand">
+<p class="mb-4">
+                        躲进这个窄窄的小巷，正当天空放晴。湿润路面的气息，混合着烤地瓜的香气，弥漫在空气中。
+                    </p>
+<p class="mb-4">
+                        你坚持要记录下这一刻，说雨落下的声音和雨棚的敲击声是这次旅行的“最佳背景音乐”。
+                    </p>
+<p>
+                        回想起来，我觉得你是对的。看着这个，我依然能感觉到骨子里的潮气，但那是一种好的感觉。这一刻，被完美定格。
+                    </p>
+<!-- Signature -->
+<div class="mt-8 text-right transform -rotate-3 text-2xl opacity-80">
+                        - J.
+                    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

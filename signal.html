@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Memory Vine - 创建档案</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&amp;family=Zhi+Mang+Xing&amp;family=Newsreader:ital,wght@0,400;0,600;1,400&amp;family=Space+Grotesk:wght@300;400&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-fixed-variant": "#b68d4c",
+              "on-secondary-container": "#2C2621",
+              "primary-container": "#A44C40",
+              "primary-fixed-dim": "#d2c4a7",
+              "on-tertiary": "#2C2621",
+              "inverse-surface": "#3a2e26",
+              "secondary": "#A44C40",
+              "outline-variant": "#d2c4a7",
+              "on-error": "#ffffff",
+              "surface-container-low": "#f5ebd9",
+              "surface-dim": "#d2c4a7",
+              "tertiary-container": "#f3e2c7",
+              "on-surface-variant": "#4A3B32",
+              "on-primary-container": "#ffffff",
+              "surface-tint": "#4A3B32",
+              "on-tertiary-fixed": "#2C2621",
+              "secondary-fixed": "#f3e2c7",
+              "error": "#ba1a1a",
+              "on-secondary": "#ffffff",
+              "tertiary": "#c19e67",
+              "on-secondary-fixed-variant": "#A44C40",
+              "surface-bright": "#FCFAF7",
+              "on-background": "#2C2621",
+              "on-primary": "#FCFAF7",
+              "primary-fixed": "#e8ddd0",
+              "on-secondary-fixed": "#2C2621",
+              "inverse-on-surface": "#F2EAE1",
+              "secondary-container": "#c19e67",
+              "secondary-fixed-dim": "#c19e67",
+              "outline": "#9ca3af",
+              "on-error-container": "#93000a",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-high": "#e8ddd0",
+              "background": "#F2EAE1",
+              "on-primary-fixed-variant": "#4A3B32",
+              "error-container": "#ffdad6",
+              "tertiary-fixed-dim": "#d2c4a7",
+              "surface": "#F2EAE1",
+              "on-primary-fixed": "#2C2621",
+              "surface-container-highest": "#3a2e26",
+              "on-tertiary-container": "#3a2e26",
+              "surface-variant": "#e8ddd0",
+              "on-surface": "#2C2621",
+              "tertiary-fixed": "#f5ebd9",
+              "primary": "#4A3B32",
+              "inverse-primary": "#f3e2c7",
+              "surface-container": "#F2EAE1"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif SC", "serif"],
+              "body": ["Newsreader", "serif"],
+              "label": ["Space Grotesk", "monospace"],
+              "hand": ["Zhi Mang Xing", "cursive"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .leather-bg {
+            background-color: #3a2e26;
+            background-image: radial-gradient(#4a3b32 1px, transparent 0);
+            background-size: 40px 40px;
+            position: relative;
+        }
+        .grain-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            z-index: 100;
+        }
+        .vellum-sheet {
+            box-shadow: 8px 12px 0px rgba(0, 0, 0, 0.3);
+            mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0 L100,0 L100,100 L0,100 Z' /%3E%3C/svg%3E");
+            clip-path: polygon(1% 1%, 98% 2%, 99% 98%, 2% 99%, 0% 50%);
+        }
+        .tape {
+            background: rgba(210, 196, 167, 0.4);
+            backdrop-filter: blur(1px);
+            width: 100px;
+            height: 30px;
+            transform: rotate(-5deg);
+        }
+        .stamp-btn {
+            background: linear-gradient(145deg, #a44c40, #8a3a30);
+            box-shadow: inset 1px 1px 2px rgba(255,255,255,0.2), 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .ink-line {
+            border-bottom: 1px dashed rgba(74, 59, 50, 0.3);
+        }
+    </style>
+</head>
+<body class="leather-bg min-h-screen flex items-center justify-center p-8 overflow-hidden font-body text-on-surface">
+<div class="grain-overlay"></div>
+<!-- Top Navigation (Shell Implementation) -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-[#3a2e26] border-b border-dashed border-[#f5ebd9]/20 shadow-[0px_10px_20px_rgba(0,0,0,0.4)] flex justify-between items-center w-full px-6 py-4">
+<div class="font-serif italic text-2xl tracking-tight text-[#f5ebd9] drop-shadow-[1px_1px_0px_rgba(0,0,0,0.5)]">Memory Vine</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-[#f5ebd9] text-2xl cursor-pointer hover:bg-white/5 transition-colors p-1 rounded">account_circle</span>
+</div>
+</nav>
+<!-- Main Registration Canvas -->
+<main class="relative w-full max-w-2xl mt-16 flex flex-col items-center">
+<!-- Decorative Tape Pieces -->
+<div class="absolute -top-4 left-1/4 tape z-10 border-l border-r border-black/5"></div>
+<div class="absolute -top-6 right-1/3 tape z-10 opacity-60 rotate-12 border-l border-r border-black/5"></div>
+<!-- The Vellum Form -->
+<div class="vellum-sheet bg-surface-container-low w-full p-12 md:p-20 relative overflow-hidden flex flex-col items-center">
+<!-- Corner Vine Accent -->
+<div class="absolute top-0 right-0 p-4 opacity-20 pointer-events-none">
+<span class="material-symbols-outlined text-6xl text-primary" style="font-variation-settings: 'FILL' 0, 'wght' 200;">potted_plant</span>
+</div>
+<!-- Header Section -->
+<header class="text-center mb-12">
+<h1 class="font-headline text-4xl text-primary mb-2 tracking-tight">开启记忆之书</h1>
+<p class="font-hand text-3xl text-primary/80 transform -rotate-1">Create your Archive</p>
+<div class="mt-6 flex justify-center opacity-40">
+<span class="material-symbols-outlined text-4xl">history_edu</span>
+</div>
+</header>
+<!-- Registration Form -->
+<form class="w-full max-w-md space-y-8">
+<!-- Field: User ID -->
+<div class="group">
+<label class="font-hand text-2xl text-primary/70 block mb-1 ml-1 transform -rotate-1">用户名 / Alias</label>
+<div class="relative ink-line">
+<input class="w-full bg-transparent border-none focus:ring-0 font-body text-xl py-2 px-0 text-on-surface placeholder:text-on-surface/30" placeholder="如何称呼您？" type="text"/>
+<span class="material-symbols-outlined absolute right-0 bottom-2 text-on-surface/20">person</span>
+</div>
+</div>
+<!-- Field: Email -->
+<div class="group">
+<label class="font-hand text-2xl text-primary/70 block mb-1 ml-1 transform rotate-1">电子邮件 / Correspondence</label>
+<div class="relative ink-line">
+<input class="w-full bg-transparent border-none focus:ring-0 font-body text-xl py-2 px-0 text-on-surface placeholder:text-on-surface/30" placeholder="信件往来地址" type="email"/>
+<span class="material-symbols-outlined absolute right-0 bottom-2 text-on-surface/20">mail</span>
+</div>
+</div>
+<!-- Field: Password -->
+<div class="group">
+<label class="font-hand text-2xl text-primary/70 block mb-1 ml-1 transform -rotate-1">密码 / Cypher</label>
+<div class="relative ink-line">
+<input class="w-full bg-transparent border-none focus:ring-0 font-body text-xl py-2 px-0 text-on-surface placeholder:text-on-surface/30" placeholder="档案锁钥" type="password"/>
+<span class="material-symbols-outlined absolute right-0 bottom-2 text-on-surface/20">lock</span>
+</div>
+</div>
+<!-- Field: Confirm Password -->
+<div class="group">
+<label class="font-hand text-2xl text-primary/70 block mb-1 ml-1 transform rotate-1">确认密码 / Re-verify</label>
+<div class="relative ink-line">
+<input class="w-full bg-transparent border-none focus:ring-0 font-body text-xl py-2 px-0 text-on-surface placeholder:text-on-surface/30" placeholder="再次确认钥扣" type="password"/>
+<span class="material-symbols-outlined absolute right-0 bottom-2 text-on-surface/20">verified_user</span>
+</div>
+</div>
+<!-- Terms/Privacy Fine Print -->
+<div class="pt-4 flex items-start gap-3">
+<input class="mt-1 bg-transparent border-primary/40 text-primary focus:ring-primary/20 rounded-sm" type="checkbox"/>
+<p class="font-label text-xs uppercase tracking-widest text-on-surface/50 leading-relaxed">
+                        我同意遵守 <span class="underline cursor-pointer">隐私账本</span> 与 <span class="underline cursor-pointer">档案使用条例</span>
+</p>
+</div>
+<!-- Actions -->
+<div class="flex flex-col items-center gap-6 pt-6">
+<button class="stamp-btn px-12 py-4 rounded-sm text-on-primary-container font-headline text-2xl tracking-widest uppercase transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-3" type="submit">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">approval</span>
+                        创建档案
+                    </button>
+<a class="font-body italic text-primary/60 hover:text-primary transition-colors border-b border-primary/20 pb-0.5" href="#">
+                        已有档案？以此处登入
+                    </a>
+</div>
+</form>
+<!-- Decorative Wax Seal / Postmark -->
+<div class="absolute bottom-8 right-8 flex flex-col items-center opacity-60">
+<div class="w-16 h-16 border-2 border-dashed border-primary/40 rounded-full flex items-center justify-center text-primary/40 rotate-12 mb-2">
+<span class="material-symbols-outlined text-4xl">public</span>
+</div>
+<div class="font-label text-[10px] uppercase tracking-tighter text-primary/40">Established 1924</div>
+</div>
+<!-- Bottom Vine Accent -->
+<div class="absolute bottom-0 left-0 p-4 opacity-20 pointer-events-none transform scale-x-[-1]">
+<span class="material-symbols-outlined text-6xl text-primary" style="font-variation-settings: 'FILL' 0, 'wght' 200;">potted_plant</span>
+</div>
+</div>
+</main>
+<!-- Footer (Shell Implementation) -->
+<footer class="fixed bottom-0 left-0 right-0 bg-[#3a2e26] border-t border-dashed border-[#f5ebd9]/10 flex flex-col md:flex-row justify-between items-center w-full px-8 py-6 gap-4 z-50">
+<div class="font-mono text-[10px] uppercase tracking-widest text-[#f5ebd9]/60">© 1924 Memory Vine Archives</div>
+<div class="flex gap-8">
+<a class="font-mono text-[10px] uppercase tracking-widest text-[#f5ebd9]/40 hover:text-[#f5ebd9] transition-opacity" href="#">Privacy Ledger</a>
+<a class="font-mono text-[10px] uppercase tracking-widest text-[#f5ebd9]/40 hover:text-[#f5ebd9] transition-opacity" href="#">Terms of Service</a>
+<a class="font-mono text-[10px] uppercase tracking-widest text-[#f5ebd9]/40 hover:text-[#f5ebd9] transition-opacity" href="#">Archive Help</a>
+</div>
+</footer>
+<!-- Image Placeholders (hidden) for Compliance -->
+<div class="hidden">
+<img data-alt="Abstract leather texture background with subtle grain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALHuzNn_zXIGViM0xLi-NkfsPmhwUBDbGrvnJuyAl7A75i42KyU0MFnbuYGdC2R4Kuz_2kyIMJr1rpiie1R7J4H7bBi-rjsGHNzXnHHFlFbth4dgbfo663g1Kc2lPsmgHEiVMFCHvaRVUvbiWeuFk0sTHWXjoytStAMuOkDAT2czferJGCy5aDayDJOB9PtSNU8qUVwWLNwTdGeiS-Al-IhZOS-IALXLkjTOHpqnYNyoyrxw9pAqTgbffaVXKTocDtG7Dyx0G3pvyd"/>
+<img data-alt="Torn vellum paper texture with deckled edges" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsW85xqvoHxoA0ZSiUrouC3_Vs8g___jJW0ipscwhF2_6SzmECyjky-yFQtLqWPEK3Hr9GFpsDUKlgdsE3Ym2nVzOcxCLmyIOKSOXHDOzKKEySalDGyrl1n1iMoojSmOu4YMl7mp-AJtJbUZOpDEOBSm54eVwZDMPQzLbFtanHHxGf3wdezL-LsgCC2rAKrOyHWZFT_pBXd4g7-Ve2rvEB4hpKgk9O4EyJadI6sBBkfvO96FbE8h1VYpxBulsgjuxW9Mg4r_B1niO6"/>
+<img data-alt="Vintage postmark with circular stamp design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7lSqe1kA_yvLcN5CkO9Sp09YvgUGdyyjAA0mlIiCy0pwbWl7wIFXYVBoq6lGrjg9dAD01LqwZj-SoDSYNUjT9aqvzQpbpYH9UZTHTuS_mlN2As_6S2lNYpUp6gyfZx998-QZ4hVSVHDLSl9npq7fZW2V9P6qQ6ocCJ1so9XOuGnvOwIVJWr7KU69-P-0Di-4xhBkiEm2VD8aVMpDxnJiPCDxxdK5NrmNf3uAg_O0NVKGwy4oDodJiZu17auaZiNsznn_Fy76_3cVA"/>
+</div>
+</body></html>
