@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:vercel": "next build && node ./scripts/fix-vercel-next-path.mjs",
+    "postbuild": "node ./scripts/fix-vercel-next-path.mjs",
     "start": "next start",
     "lint": "next lint",
     "test": "vitest run",

@@ -7,5 +7,6 @@ dist
 .cookies.txt
 .login-body.json
 *.log
+*.err
 
 .vercel
