@@ -9,7 +9,7 @@ type CookieToSet = {
   options?: Parameters<Awaited<ReturnType<typeof cookies>>["set"]>[2];
 };
 
-export async function getSupabaseServerClient() {
+async function createSupabaseServerClient(canSetCookies: boolean) {
   const cookieStore = await cookies();
   const env = getPublicEnv();
 
@@ -19,10 +19,22 @@ export async function getSupabaseServerClient() {
         return cookieStore.getAll();
       },
       setAll(cookiesToSet: CookieToSet[]) {
+        if (!canSetCookies) {
+          return;
+        }
+
         cookiesToSet.forEach(({ name, value, options }) => {
           cookieStore.set(name, value, options);
         });
       }
     }
   });
+}
+
+export async function getSupabaseServerClient() {
+  return createSupabaseServerClient(true);
+}
+
+export async function getSupabaseServerComponentClient() {
+  return createSupabaseServerClient(false);
 }

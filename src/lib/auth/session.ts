@@ -1,9 +1,14 @@
 import { redirect } from "next/navigation";
 
-import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { hasPublicEnv } from "@/lib/env";
+import { getSupabaseServerComponentClient } from "@/lib/supabase/server";
 
 export async function requireUser() {
-  const supabase = await getSupabaseServerClient();
+  if (!hasPublicEnv()) {
+    redirect("/");
+  }
+
+  const supabase = await getSupabaseServerComponentClient();
   const {
     data: { user }
   } = await supabase.auth.getUser();
@@ -16,7 +21,11 @@ export async function requireUser() {
 }
 
 export async function getOptionalUser() {
-  const supabase = await getSupabaseServerClient();
+  if (!hasPublicEnv()) {
+    return null;
+  }
+
+  const supabase = await getSupabaseServerComponentClient();
   const {
     data: { user }
   } = await supabase.auth.getUser();

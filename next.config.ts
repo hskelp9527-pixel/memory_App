@@ -1,5 +1,22 @@
-import type { NextConfig } from "next";
 import path from "node:path";
+
+import type { NextConfig } from "next";
+
+function getSupabaseHostname() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
+
+  if (!supabaseUrl) {
+    return null;
+  }
+
+  try {
+    return new URL(supabaseUrl).hostname;
+  } catch {
+    return null;
+  }
+}
+
+const supabaseHostname = getSupabaseHostname();
 
 const nextConfig: NextConfig = {
   outputFileTracingRoot: path.join(__dirname, ".."),
@@ -13,10 +30,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "www.transparenttextures.com"
       },
-      {
-        protocol: "https",
-        hostname: "wbibokdzpjspqkrkntts.supabase.co"
-      }
+      ...(supabaseHostname
+        ? [
+            {
+              protocol: "https" as const,
+              hostname: supabaseHostname
+            }
+          ]
+        : [])
     ]
   }
 };
